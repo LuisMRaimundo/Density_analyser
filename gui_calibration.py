@@ -1,4 +1,4 @@
-# gui_calibration.py
+﻿# gui_calibration.py
 """
 Complemento para a GUI principal com widgets específicos para calibração
 do parâmetro lambda.
@@ -90,14 +90,14 @@ class CalibrationWindow:
         """Configura os controles no painel esquerdo."""
         frame = self.control_frame
 
-        # Obter valor actual de lambda
+        # Obter valor atual de lambda
         lambda_atual = self.obter_lambda_atual()
 
-        # Mostrar valor actual
+        # Mostrar valor atual
         valor_frame = ttk.Frame(frame)
         valor_frame.pack(fill=tk.X, padx=10, pady=10)
 
-        ttk.Label(valor_frame, text="Valor actual de lambda:").pack(side=tk.LEFT)
+        ttk.Label(valor_frame, text="Valor atual de lambda:").pack(side=tk.LEFT)
 
         self.lambda_var = tk.StringVar(value=f"{lambda_atual:.4f}")
         lambda_label = ttk.Label(valor_frame, textvariable=self.lambda_var, font=("Arial", 12, "bold"))
@@ -106,17 +106,17 @@ class CalibrationWindow:
         # Separador
         ttk.Separator(frame, orient=tk.HORIZONTAL).pack(fill=tk.X, padx=10, pady=5)
 
-        # Botões de acção
-        action_frame = ttk.LabelFrame(frame, text="Acções")
+        # Botões de ação
+        action_frame = ttk.LabelFrame(frame, text="Ações")
         action_frame.pack(fill=tk.X, padx=10, pady=10)
 
         ttk.Button(action_frame, text="Calibrar com Dados Padrão",
                   command=self._calibrar_automaticamente).pack(fill=tk.X, padx=5, pady=5)
 
-        ttk.Button(action_frame, text="Visualizar Função Actual",
+        ttk.Button(action_frame, text="Visualizar Função Atual",
                   command=self._visualizar_funcao).pack(fill=tk.X, padx=5, pady=5)
 
-        ttk.Button(action_frame, text="Testar Modelo Actual",
+        ttk.Button(action_frame, text="Testar Modelo Atual",
                   command=self._testar_modelo).pack(fill=tk.X, padx=5, pady=5)
 
         ttk.Button(action_frame, text="Analisar Sensibilidade",
@@ -148,7 +148,7 @@ class CalibrationWindow:
         ttk.Label(limits_frame, text="0.01").pack(side=tk.LEFT)
         ttk.Label(limits_frame, text="1.0").pack(side=tk.RIGHT)
 
-        # Valor actual do slider
+        # Valor atual do slider
         slider_value_frame = ttk.Frame(manual_frame)
         slider_value_frame.pack(fill=tk.X, padx=5, pady=5)
 
@@ -174,7 +174,7 @@ class CalibrationWindow:
     def _setup_visualization(self):
         """Configura a área de visualização no painel direito."""
         # Mensagem inicial
-        self.viz_msg = tk.Label(self.viz_frame, text="Seleccione uma opção para visualizar", font=("Arial", 12))
+        self.viz_msg = tk.Label(self.viz_frame, text="Selecione uma opção para visualizar", font=("Arial", 12))
         self.viz_msg.pack(expand=True, fill=tk.BOTH)
 
         # Figura
@@ -186,7 +186,7 @@ class CalibrationWindow:
         value_float = float(value)
         self.slider_value_var.set(f"{value_float:.4f}")
 
-        # Actualização em tempo real (opcional)
+        # Atualização em tempo real (opcional)
         # self._visualizar_funcao(value_float)
 
     def _aplicar_valor_manual(self):
@@ -231,11 +231,11 @@ class CalibrationWindow:
             messagebox.showerror("Erro", f"Erro durante calibração: {e}")
 
     def _visualizar_funcao(self, lambda_valor=None):
-        """Visualiza a função exponencial com o valor actual de lambda."""
+        """Visualiza a função exponencial com o valor atual de lambda."""
         # Limpar visualização anterior
         self._clear_visualization()
 
-        # Se não foi fornecido um valor, usar o actual
+        # Se não foi fornecido um valor, usar o atual
         if lambda_valor is None:
             lambda_valor = self.obter_lambda_atual()
 
@@ -274,7 +274,7 @@ class CalibrationWindow:
         # Limpar visualização anterior
         self._clear_visualization()
 
-        # Obter valor actual de lambda
+        # Obter valor atual de lambda
         lambda_atual = self.obter_lambda_atual()
 
         # Criar figura
@@ -290,7 +290,7 @@ class CalibrationWindow:
             intervalos.append(str(intervalo))
             valores_exp.append(valor_exp)
 
-            # Calcular valor do modelo com o lambda actual
+            # Calcular valor do modelo com o lambda atual
             if intervalo == 0:  # Uníssono
                 densidade = 0
             else:
@@ -343,7 +343,7 @@ class CalibrationWindow:
 
         # Intervalos padrão para teste
         intervalos_teste = [
-            ("Uníssono", 0),
+            ("Unísono", 0),
             ("Segunda menor", 1),
             ("Segunda maior", 2),
             ("Terça menor", 3),
@@ -380,10 +380,10 @@ class CalibrationWindow:
         ax.legend()
         ax.grid(True, alpha=0.3)
 
-        # Mostrar valor actual de lambda como linha vertical
+        # Mostrar valor atual de lambda como linha vertical
         lambda_atual = self.obter_lambda_atual()
         ax.axvline(x=lambda_atual, color='black', linestyle='--', alpha=0.5)
-        ax.text(lambda_atual + 0.02, 0.9, f"λ actual = {lambda_atual:.4f}",
+        ax.text(lambda_atual + 0.02, 0.9, f"λ atual = {lambda_atual:.4f}",
                transform=ax.get_xaxis_transform(), fontsize=9)
 
         plt.tight_layout()
@@ -408,7 +408,7 @@ class CalibrationWindow:
             self.fig = None
 
     def _show_figure(self):
-        """Exibe a figura actual no canvas."""
+        """Exibe a figura atual no canvas."""
         if self.fig:
             # Criar canvas
             self.canvas = FigureCanvasTkAgg(self.fig, master=self.viz_frame)

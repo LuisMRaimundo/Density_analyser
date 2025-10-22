@@ -1,4 +1,4 @@
-# plot_metr_espectrais.py
+﻿# plot_metr_espectrais.py
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -54,7 +54,7 @@ def plot_metricas_espectrais_completo(metrics, title="Métricas Espectrais", fil
         formato = metrics_values[label]['formato']
 
         if label == 'Centróide':
-            # Usar a nota E4 directamente (corrigindo a discrepância)
+            # Usar a nota E4 diretamente (corrigindo a discrepância)
             nota = metrics.get('centroid_note', frequency_to_note_name(valor_original))
             ax.text(i, 0.5, f"{nota}\n({valor_original:.2f} Hz)",
                    ha='center', va='center', fontsize=12, fontweight='bold',
@@ -91,7 +91,7 @@ def plot_metricas_espectrais_completo(metrics, title="Métricas Espectrais", fil
 
 def extract_and_plot_metrics(notas, duracoes, instrumentos, numeros_instrumentos, densidades_instrumento, note_to_midi_func=None):
     """
-    Versão actualizada que passa a nota do centróide explicitamente
+    Versão atualizada que passa a nota do centróide explicitamente
     """
     try:
         # Converter notas para MIDI
@@ -133,7 +133,7 @@ def extract_and_plot_metrics(notas, duracoes, instrumentos, numeros_instrumentos
                  extended_metrics.get("spectral_entropy", 0))))
 
         # Imprimir todas as métricas disponíveis
-        print(f"Centróide: {centroid_freq:.2f} Hz, Nota: {centroid_note}")
+        print(f"Centróide: {centroid_freq:.2f} Hz, Note: {centroid_note}")
         print(f"Dispersão: ±{spread_hz:.2f} Hz")
         print(f"Assimetria: {skewness:.4f}")
         print(f"Curtose: {kurtosis:.4f}")
@@ -169,11 +169,11 @@ def extract_and_plot_metrics(notas, duracoes, instrumentos, numeros_instrumentos
         return {}
 
 
-# Adicione este código ao final do ficheiro para calcular explicitamente as métricas estendidas
+# Adicione este código ao final do arquivo para calcular explicitamente as métricas estendidas
 def calculate_all_spectral_metrics(pitches, amplitudes):
     """
     Função que calcula TODAS as métricas espectrais possíveis.
-    Útil para chamar directamente quando necessário.
+    Útil para chamar diretamente quando necessário.
     """
     # Calcular métricas básicas
     basic_metrics = calculate_spectral_moments(pitches, amplitudes)

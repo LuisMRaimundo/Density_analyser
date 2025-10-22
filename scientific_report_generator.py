@@ -40,7 +40,7 @@ class ScientificReportGenerator:
 
         Args:
 
-            output_directory (str, optional): Directório para salvar os relatórios.
+            output_directory (str, optional): Diretório para salvar os relatórios.
 
         """
 
@@ -276,7 +276,7 @@ class ScientificReportGenerator:
 
 
 
-        # Colectar os valores numéricos dos momentos espectrais
+        # Coletar os valores numéricos dos momentos espectrais
 
         for k, v in momentos.items():
 
@@ -294,9 +294,9 @@ class ScientificReportGenerator:
 
 
 
-        print(f"Diagnóstico: Métricas colectadas: {metrics}")
+        print(f"Diagnóstico: Métricas coletadas: {metrics}")
 
-        print(f"Diagnóstico: Valores colectados: {values}")
+        print(f"Diagnóstico: Valores coletados: {values}")
 
 
 
@@ -362,7 +362,7 @@ class ScientificReportGenerator:
 
         """
 
-        Cria um gráfico para o vector de croma se disponível.
+        Cria um gráfico para o vetor de croma se disponível.
 
 
 
@@ -396,15 +396,15 @@ class ScientificReportGenerator:
 
         chroma = resultados['metricas_adicionais']['chroma_vector']
 
-        print(f"Diagnóstico: Tipo de croma: {type(chroma)}")
+        print(f"Diagnóstico: Tipo de chroma: {type(chroma)}")
 
-        print(f"Diagnóstico: Conteúdo de croma: {chroma}")
+        print(f"Diagnóstico: Conteúdo de chroma: {chroma}")
 
 
 
         if not isinstance(chroma, list) or len(chroma) != 12:
 
-            print(f"Diagnóstico: croma deve ser uma lista de 12 elementos. Encontrado: {type(chroma)} com {len(chroma) if isinstance(chroma, list) else 'N/A'} elementos")
+            print(f"Diagnóstico: chroma deve ser uma lista de 12 elementos. Encontrado: {type(chroma)} com {len(chroma) if isinstance(chroma, list) else 'N/A'} elementos")
 
             return None
 
@@ -422,7 +422,7 @@ class ScientificReportGenerator:
 
         ax.set_ylabel('Energia')
 
-        ax.set_title('Distribuição de Energia por Classe de Altura (Croma)')
+        ax.set_title('Distribuição de Energia por Classe de Altura (Chroma)')
 
 
 
@@ -460,7 +460,7 @@ class ScientificReportGenerator:
 
         Returns:
 
-            str: Caminho para o ficheiro PDF gerado.
+            str: Caminho para o arquivo PDF gerado.
 
         """
 
@@ -482,7 +482,7 @@ class ScientificReportGenerator:
 
 
 
-            # Definir caminho do ficheiro
+            # Definir caminho do arquivo
 
             output_path = os.path.join(self.output_directory, f"relatorio_analise_espectral_{self.timestamp}.pdf")
 
@@ -584,7 +584,7 @@ class ScientificReportGenerator:
 
 
 
-            # Resultados da análise - Secção de densidade
+            # Resultados da análise - Seção de densidade
 
             if 'densidade' in resultados:
 
@@ -790,13 +790,13 @@ class ScientificReportGenerator:
 
                         resultados,
 
-                        "Vector de Croma"
+                        "Vetor de Croma"
 
                     )
 
                     if chroma_plot:
 
-                        elements.append(Paragraph("Vector de Croma", styles['Heading3']))
+                        elements.append(Paragraph("Vetor de Croma", styles['Heading3']))
 
                         img_buffer = io.BytesIO()
 
@@ -812,7 +812,7 @@ class ScientificReportGenerator:
 
 
 
-            # Incluir outras secções de métricas (textura, timbre, etc.) seguindo o mesmo padrão
+            # Incluir outras seções de métricas (textura, timbre, etc.) seguindo o mesmo padrão
 
             for section_name, section_title in [
 
@@ -904,7 +904,7 @@ class ScientificReportGenerator:
 
         except ImportError as e:
 
-            # Fallback para ficheiro de texto se reportlab não estiver disponível
+            # Fallback para arquivo de texto se reportlab não estiver disponível
 
             print(f"Erro de importação: {e}")
 
@@ -918,7 +918,7 @@ class ScientificReportGenerator:
 
             print(f"Erro ao gerar relatório PDF: {str(e)}")
 
-            # Fallback para ficheiro de texto em caso de erro
+            # Fallback para arquivo de texto em caso de erro
 
             return self.generate_text_report(resultados, config)
 
@@ -942,7 +942,7 @@ class ScientificReportGenerator:
 
         Returns:
 
-            str: Caminho para o ficheiro de texto gerado.
+            str: Caminho para o arquivo de texto gerado.
 
         """
 
@@ -1012,11 +1012,11 @@ class ScientificReportGenerator:
 
                     if k == "Centróide":
 
-                        f.write(f"  Centróide: {v['frequency']:.2f} Hz ({v['note']})\n")
+                        f.write(f"  Centroid: {v['frequency']:.2f} Hz ({v['note']})\n")
 
                     elif k == "Dispersão":
 
-                        f.write(f"  Dispersão: ±{v['deviation']:.2f} Hz\n")
+                        f.write(f"  Spread: ±{v['deviation']:.2f} Hz\n")
 
                     elif isinstance(v, (int, float)) and not np.isnan(v) and not np.isinf(v):
 
@@ -1040,7 +1040,7 @@ class ScientificReportGenerator:
 
 
 
-            # Adicionar as demais secções
+            # Adicionar as demais seções
 
             for section_name, section_title in [
 
@@ -1096,11 +1096,11 @@ class ScientificReportGenerator:
 
         Returns:
 
-            str: Caminho para o ficheiro gerado.
+            str: Caminho para o arquivo gerado.
 
         """
 
-        # Implementação simplificada - apenas gera um ficheiro de texto
+        # Implementação simplificada - apenas gera um arquivo de texto
 
         output_path = os.path.join(self.output_directory, f"paper_analise_espectral_{self.timestamp}.txt")
 
@@ -1150,7 +1150,7 @@ class ScientificReportGenerator:
 
         Returns:
 
-            str: Caminho para o directório com as figuras.
+            str: Caminho para o diretório com as figuras.
 
         """
 
@@ -1210,7 +1210,7 @@ class ScientificReportGenerator:
 
                     resultados,
 
-                    "Vector de Croma"
+                    "Vetor de Croma"
 
                 )
 
@@ -1222,7 +1222,7 @@ class ScientificReportGenerator:
 
             with open(os.path.join(figures_dir, "figuras_info.txt"), 'w', encoding='utf-8') as f:
 
-                f.write("Este directório contém figuras para publicação geradas a partir da análise espectral.\n")
+                f.write("Este diretório contém figuras para publicação geradas a partir da análise espectral.\n")
 
                 f.write("As figuras estão em formato PNG com alta resolução (300 DPI).\n")
 
@@ -1260,7 +1260,7 @@ class ScientificReportGenerator:
 
             Returns:
 
-                str: Caminho para o directório com as tabelas.
+                str: Caminho para o diretório com as tabelas.
 
             """
 
@@ -1302,7 +1302,7 @@ class ScientificReportGenerator:
 
                             momentos_data.append({
 
-                                'Métrica': 'Centróide (Frequência)',
+                                'Métrica': 'Centroid (Frequência)',
 
                                 'Valor': v['frequency']
 
@@ -1310,7 +1310,7 @@ class ScientificReportGenerator:
 
                             momentos_data.append({
 
-                                'Métrica': 'Centróide (Nota)',
+                                'Métrica': 'Centroid (Nota)',
 
                                 'Valor': v['note']
 
@@ -1320,7 +1320,7 @@ class ScientificReportGenerator:
 
                             momentos_data.append({
 
-                                'Métrica': 'Dispersão',
+                                'Métrica': 'Spread',
 
                                 'Valor': v['deviation']
 
@@ -1374,7 +1374,7 @@ class ScientificReportGenerator:
 
 
 
-                    # Salvar vector de croma separadamente se disponível
+                    # Salvar vetor de croma separadamente se disponível
 
                     if 'chroma_vector' in resultados['metricas_adicionais']:
 
@@ -1396,7 +1396,7 @@ class ScientificReportGenerator:
 
 
 
-                # Salvar tabelas para outras secções
+                # Salvar tabelas para outras seções
 
                 for section_name, file_name in [
 
@@ -1434,7 +1434,7 @@ class ScientificReportGenerator:
 
 
 
-                # Criar ficheiro de índice
+                # Criar arquivo de índice
 
                 with open(os.path.join(tables_dir, "indice.txt"), 'w', encoding='utf-8') as f:
 
@@ -1442,11 +1442,11 @@ class ScientificReportGenerator:
 
                     f.write("=========================\n\n")
 
-                    f.write("Este directório contém as seguintes tabelas de dados em formato CSV:\n\n")
+                    f.write("Este diretório contém as seguintes tabelas de dados em formato CSV:\n\n")
 
 
 
-                    # Listar ficheiros criados
+                    # Listar arquivos criados
 
                     for file in os.listdir(tables_dir):
 

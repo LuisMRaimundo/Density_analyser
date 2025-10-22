@@ -1,6 +1,6 @@
-# Main.py
+﻿# Main.py
 """
-Versão integrada do ficheiro principal com suporte
+Versão integrada do arquivo principal com suporte
 para calibração do parâmetro lambda.
 """
 
@@ -73,10 +73,10 @@ class DensityAnalyzerApp:
         """
         self.root = root
 
-        # Inicializar tratamento global de excepções
+        # Inicializar tratamento global de exceções
         init_global_exception_hook()
 
-        # Garantir que o directório de saída existe
+        # Garantir que o diretório de saída existe
         ensure_directory_exists(DEFAULT_OUTPUT_DIRECTORY)
 
         # Lista para armazenar histórico de resultados para validação
@@ -105,9 +105,9 @@ class DensityAnalyzerApp:
         menubar = tk.Menu(self.root)
         self.root.config(menu=menubar)
 
-        # Menu de ficheiro
+        # Menu de arquivo
         filemenu = tk.Menu(menubar, tearoff=0)
-        menubar.add_cascade(label="Ficheiro", menu=filemenu)
+        menubar.add_cascade(label="Arquivo", menu=filemenu)
         filemenu.add_command(label="Sair", command=self.root.quit)
 
         # Menu de ferramentas
@@ -139,19 +139,19 @@ class DensityAnalyzerApp:
         dialog.transient(self.root)
         dialog.grab_set()
 
-        # Mostrar valor actual
+        # Mostrar valor atual
         lambda_atual = obter_lambda_atual()
-        tk.Label(dialog, text=f"Valor actual de lambda: {lambda_atual:.4f}",
+        tk.Label(dialog, text=f"Valor atual de lambda: {lambda_atual:.4f}",
                 font=("Arial", 12)).pack(pady=10)
 
         # Opções de calibração
         tk.Button(dialog, text="Calibrar com Dados Padrão",
                  command=lambda: self._executar_calibracao(dialog)).pack(pady=5)
 
-        tk.Button(dialog, text="Visualizar Função Actual",
+        tk.Button(dialog, text="Visualizar Função Atual",
                  command=lambda: visualizar_funcao_exponencial(lambda_atual)).pack(pady=5)
 
-        tk.Button(dialog, text="Testar Modelo Actual",
+        tk.Button(dialog, text="Testar Modelo Atual",
                  command=testar_modelo_calibrado).pack(pady=5)
 
         tk.Button(dialog, text="Análise de Sensibilidade",
@@ -246,7 +246,7 @@ class DensityAnalyzerApp:
 
         # Validar entrada básica
         if not input_data['notes']:
-            raise InputError("Nenhuma nota seleccionada. Marque pelo menos uma caixa de selecção.")
+            raise InputError("Nenhuma nota selecionada. Marque pelo menos uma caixa de seleção.")
 
         # Log para diagnóstico
         logger.info(f"Iniciando cálculo com notas: {input_data['notes']}")
@@ -282,11 +282,11 @@ class DensityAnalyzerApp:
         # Se solicitado, salvar resultados
         if input_data['save_results']:
             try:
-                # Criar nome de ficheiro com timestamp para evitar sobrescrita
+                # Criar nome de arquivo com timestamp para evitar sobrescrita
                 from datetime import datetime
                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-                # Garantir que o directório existe
+                # Garantir que o diretório existe
                 import os
                 from config import DEFAULT_OUTPUT_DIRECTORY
                 if not os.path.exists(DEFAULT_OUTPUT_DIRECTORY):
@@ -302,7 +302,7 @@ class DensityAnalyzerApp:
                 if arquivo_salvo:
                     from tkinter import messagebox
                     messagebox.showinfo("Informação", f"Resultados salvos com sucesso em:\n{arquivo_salvo}")
-                    logger.info(f"Ficheiro salvo com sucesso em: {arquivo_salvo}")
+                    logger.info(f"Arquivo salvo com sucesso em: {arquivo_salvo}")
                 else:
                     logger.warning("Função salvar_resultados não retornou caminho válido")
             except Exception as e:
@@ -319,13 +319,13 @@ class DensityAnalyzerApp:
         if len(self.resultados_historicos) < 5:  # Verificar quantidade mínima de amostras
             raise InputError(
                 "São necessários pelo menos 5 conjuntos de resultados para validação estatística.",
-                f"Actualmente possui {len(self.resultados_historicos)} conjuntos."
+                f"Atualmente possui {len(self.resultados_historicos)} conjuntos."
             )
 
         # Extrair métricas do histórico
         metricas_extraidas = {}
 
-        # Usar conjunto de primeira ordem (métricas directas)
+        # Usar conjunto de primeira ordem (métricas diretas)
         for resultado in self.resultados_historicos:
             for categoria, valores in resultado.items():
                 if categoria not in ["dados_entrada"]:  # Ignorar dados de entrada
@@ -387,7 +387,7 @@ class DensityAnalyzerApp:
         """
         from scientific_report_generator import ScientificReportGenerator
 
-        # Garantir que o directório de saída existe
+        # Garantir que o diretório de saída existe
         output_dir = config.get('output_directory', DEFAULT_OUTPUT_DIRECTORY)
         ensure_directory_exists(output_dir)
 
@@ -396,7 +396,7 @@ class DensityAnalyzerApp:
 
         report_paths = {}
 
-        # Gerar relatórios seleccionados
+        # Gerar relatórios selecionados
         if config['formats']['pdf']:
             pdf_path = generator.generate_pdf_report(self.resultados_completos, config)
             report_paths['pdf'] = pdf_path

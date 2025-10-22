@@ -44,7 +44,7 @@ class DensityCalculatorGUI:
         Inicializa a interface gráfica.
         Args:
             root: O widget raiz tkinter
-            callbacks: Dicionário com callbacks para ações da interface
+            callbacks: Dicionário com callbacks para acções da interface
         """
         self.root = root
         self.root.title("Calculadora de Densidade Integrada")
@@ -73,11 +73,11 @@ class DensityCalculatorGUI:
         self.var_show_graphs = tk.BooleanVar(value=True)
 
         # Variáveis para a Lei de Stevens
-        self.var_use_stevens = tk.BooleanVar(value=True)  # Ativar Lei de Stevens por padrão
+        self.var_use_stevens = tk.BooleanVar(value=True)  # Activar Lei de Stevens por padrão
         self.alpha_var = tk.DoubleVar(value=0.7)  # Expoente alpha padrão
         self.beta_var = tk.DoubleVar(value=0.4)   # Expoente beta padrão
 
-        # Variável para correções psicoacústicas
+        # Variável para correcções psicoacústicas
         self.var_use_psychoacoustic = tk.BooleanVar(value=True)
 
         # NOVA: Variável para ponderação perceptual nos intervalos
@@ -110,7 +110,7 @@ class DensityCalculatorGUI:
 
         active_indices = [i for i in range(len(self.state_vars)) if self.state_vars[i].get() == 1]
 
-        # Correção para garantir que as notas estão no formato correto
+        # Correcção para garantir que as notas estão no formato correcto
         complete_notes = []
         for i in active_indices:
             note_part = self.note_vars[i].get()
@@ -188,7 +188,7 @@ class DensityCalculatorGUI:
         # Slider centralizado com cores nas extremidades
         self.weight_factor_slider = tk.Scale(slider_frame, from_=0, to=1, orient="horizontal",
                                             resolution=0.01, length=400, showvalue=True,
-                                            tickinterval=0.25, label="Fator de Peso")
+                                            tickinterval=0.25, label="Factor de Peso")
         self.weight_factor_slider.set(0.5)  # Valor padrão
         self.weight_factor_slider.pack(pady=(0, 10))
 
@@ -205,7 +205,7 @@ class DensityCalculatorGUI:
         options_frame = tk.Frame(self.root)
         options_frame.pack(pady=5)
 
-        save_check = tk.Checkbutton(options_frame, text="Salvar resultados em arquivo", variable=self.var_save_results)
+        save_check = tk.Checkbutton(options_frame, text="Salvar resultados em ficheiro", variable=self.var_save_results)
         save_check.pack(side=tk.LEFT, padx=5)
 
         graph_check = tk.Checkbutton(options_frame, text="Mostrar gráficos detalhados", variable=self.var_show_graphs)
@@ -216,7 +216,7 @@ class DensityCalculatorGUI:
         stevens_frame.pack(pady=5, fill="x", padx=10)
 
         # Controles dentro do frame
-        stevens_check = tk.Checkbutton(stevens_frame, text="Ativar", variable=self.var_use_stevens)
+        stevens_check = tk.Checkbutton(stevens_frame, text="Activar", variable=self.var_use_stevens)
         stevens_check.pack(side=tk.LEFT, padx=10, pady=5)
 
         tk.Label(stevens_frame, text="a:").pack(side=tk.LEFT, padx=5, pady=5)
@@ -237,13 +237,13 @@ class DensityCalculatorGUI:
         ))
         help_btn.pack(side=tk.RIGHT, padx=10, pady=5)
 
-        # Criar frame para correções psicoacústicas
-        psycho_frame = tk.LabelFrame(self.root, text="Correções Psicoacústicas")
+        # Criar frame para correcções psicoacústicas
+        psycho_frame = tk.LabelFrame(self.root, text="Correcções Psicoacústicas")
         psycho_frame.pack(pady=5, fill="x", padx=10)
 
         psycho_check = tk.Checkbutton(
             psycho_frame,
-            text="Ativar correções psicoacústicas (mascaramento, roughness, loudness)",
+            text="Activar correcções psicoacústicas (mascaramento, roughness, loudness)",
             variable=self.var_use_psychoacoustic
         )
         psycho_check.pack(side=tk.LEFT, padx=10, pady=5)
@@ -253,17 +253,17 @@ class DensityCalculatorGUI:
             psycho_frame,
             text="?",
             command=lambda: messagebox.showinfo(
-                "Correções Psicoacústicas",
+                "Correcções Psicoacústicas",
                 "Aplica modelos psicoacústicos para tornar as medições mais perceptualmente precisas:\n\n" +
                 "• Mascaramento de banda crítica\n" +
                 "• Cálculo de roughness (aspereza)\n" +
-                "• Correção de equal loudness\n\n" +
+                "• Correcção de equal loudness\n\n" +
                 "Recomendado para análises mais precisas."
             )
         )
         psycho_info_btn.pack(side=tk.RIGHT, padx=10, pady=5)
 
-        # NOVA SEÇÃO: Frame para ponderação perceptual de intervalos
+        # NOVA SECÇÃO: Frame para ponderação perceptual de intervalos
         perceptual_frame = tk.LabelFrame(self.root, text="Configurações de Densidade Intervalar")
         perceptual_frame.pack(pady=5, fill="x", padx=10)
 
@@ -291,9 +291,9 @@ class DensityCalculatorGUI:
             text="?",
             command=lambda: messagebox.showinfo(
                 "Ponderação Perceptual",
-                "Aplica ponderação baseada em registro ao calcular densidade intervalar.\n\n" +
+                "Aplica ponderação baseada em registo ao calcular densidade intervalar.\n\n" +
                 "Características:\n" +
-                "• Registros agudos = maior peso perceptual\n" +
+                "• Registos agudos = maior peso perceptual\n" +
                 "• Intervalos pequenos = maior peso (2ªs menores/maiores)\n" +
                 "• Intervalos grandes = menor peso (8ªs ou maiores)\n\n" +
                 "Melhora a precisão perceptual quando a densidade intervalar " +
@@ -311,12 +311,12 @@ class DensityCalculatorGUI:
     def _on_perceptual_weighting_changed(self):
         """Callback quando a ponderação perceptual é alterada"""
         if self.var_perceptual_weighting.get():
-            # Opcional: mostrar aviso na primeira ativação
+            # Opcional: mostrar aviso na primeira activação
             if not hasattr(self, '_perceptual_warning_shown'):
                 messagebox.showinfo(
-                    "Ponderação Perceptual Ativada",
-                    "A ponderação perceptual foi ativada.\n\n" +
-                    "Isso aplicará pesos diferentes aos intervalos baseados no registro " +
+                    "Ponderação Perceptual Activada",
+                    "A ponderação perceptual foi activada.\n\n" +
+                    "Isso aplicará pesos diferentes aos intervalos baseados no registo " +
                     "e tamanho dos intervalos, tornando o cálculo mais preciso perceptualmente."
                 )
                 self._perceptual_warning_shown = True
@@ -335,7 +335,7 @@ class DensityCalculatorGUI:
 
     def check_and_suggest_perceptual_weighting(self, interval_weight_percentage):
         """
-        Verifica se deve sugerir ativar a ponderação perceptual
+        Verifica se deve sugerir activar a ponderação perceptual
         Args:
             interval_weight_percentage: Percentual do peso dos intervalos
         """
@@ -347,16 +347,16 @@ class DensityCalculatorGUI:
                 "Sugestão de Ponderação Perceptual",
                 f"O peso dos intervalos é {interval_weight_percentage:.1f}%.\n\n" +
                 "Para uma análise mais precisa perceptualmente, " +
-                "recomenda-se ativar a ponderação perceptual.\n\n" +
-                "Deseja ativar agora?"
+                "recomenda-se activar a ponderação perceptual.\n\n" +
+                "Deseja activar agora?"
             )
 
             if result:
                 self.var_perceptual_weighting.set(True)
                 messagebox.showinfo(
-                    "Ponderação Ativada",
-                    "A ponderação perceptual foi ativada. " +
-                    "Os próximos cálculos usarão pesos baseados no registro."
+                    "Ponderação Activada",
+                    "A ponderação perceptual foi activada. " +
+                    "Os próximos cálculos usarão pesos baseados no registo."
                 )
 
             # Marcar que a sugestão já foi mostrada
@@ -373,7 +373,7 @@ class DensityCalculatorGUI:
         octave_list = [str(i) for i in range(10)]
         dynamic_levels = ['pppp', 'ppp', 'pp', 'p', 'mf', 'f', 'ff', 'fff', 'ffff']
         instruments = [
-            'Flautim', 'Flauta', 'Oboe', 'Corne_ingles', 'Clarinete', 'Clarinete baixo',
+            'Flautim', 'Flauta', 'Oboé', 'Corne_inglês', 'Clarinete', 'Clarinete baixo',
             'Fagote', 'Contrafagote', 'Trompa', 'Trompete', 'Trombone', 'Tuba',
             'Violino', 'Viola', 'Violoncelo', 'Contrabaixo'
         ]
@@ -399,7 +399,7 @@ class DensityCalculatorGUI:
         ]
 
         # Adicionar cabeçalhos para melhor identificação
-        tk.Label(self.input_frame, text="Ativar").grid(row=0, column=0, padx=5, pady=5)
+        tk.Label(self.input_frame, text="Activar").grid(row=0, column=0, padx=5, pady=5)
         tk.Label(self.input_frame, text="Nota").grid(row=0, column=1, padx=5, pady=5)
         tk.Label(self.input_frame, text="Oitava").grid(row=0, column=2, padx=5, pady=5)
         tk.Label(self.input_frame, text="Cents").grid(row=0, column=3, padx=5, pady=5)
@@ -411,7 +411,7 @@ class DensityCalculatorGUI:
         for i in range(60):
             row_offset = i + 1  # +1 devido à linha de cabeçalho
 
-            # Checkbox para ativar a linha
+            # Checkbox para activar a linha
             state_var = tk.IntVar(value=0)
             self.state_vars.append(state_var)
             checkbutton = tk.Checkbutton(self.input_frame, variable=state_var,
@@ -554,7 +554,7 @@ class DensityCalculatorGUI:
 
         # Label para explicação
 
-        validation_label = tk.Label(validation_frame, text="Esta seção permite validar a confiabilidade das métricas calculadas através de métodos estatísticos.")
+        validation_label = tk.Label(validation_frame, text="Esta secção permite validar a confiabilidade das métricas calculadas através de métodos estatísticos.")
 
         validation_label.pack(pady=10)
 
@@ -617,12 +617,12 @@ class DensityCalculatorGUI:
     def _on_perceptual_weighting_changed(self):
         """Callback quando a ponderação perceptual é alterada"""
         if self.var_perceptual_weighting.get():
-            # Opcional: mostrar aviso na primeira ativação
+            # Opcional: mostrar aviso na primeira activação
             if not hasattr(self, '_perceptual_warning_shown'):
                 messagebox.showinfo(
-                    "Ponderação Perceptual Ativada",
-                    "A ponderação perceptual foi ativada.\n\n" +
-                    "Isso aplicará pesos diferentes aos intervalos baseados no registro " +
+                    "Ponderação Perceptual Activada",
+                    "A ponderação perceptual foi activada.\n\n" +
+                    "Isso aplicará pesos diferentes aos intervalos baseados no registo " +
                     "e tamanho dos intervalos, tornando o cálculo mais preciso perceptualmente."
                 )
                 self._perceptual_warning_shown = True
@@ -641,7 +641,7 @@ class DensityCalculatorGUI:
 
     def check_and_suggest_perceptual_weighting(self, interval_weight_percentage):
         """
-        Verifica se deve sugerir ativar a ponderação perceptual
+        Verifica se deve sugerir activar a ponderação perceptual
         Args:
             interval_weight_percentage: Percentual do peso dos intervalos
         """
@@ -653,16 +653,16 @@ class DensityCalculatorGUI:
                 "Sugestão de Ponderação Perceptual",
                 f"O peso dos intervalos é {interval_weight_percentage:.1f}%.\n\n" +
                 "Para uma análise mais precisa perceptualmente, " +
-                "recomenda-se ativar a ponderação perceptual.\n\n" +
-                "Deseja ativar agora?"
+                "recomenda-se activar a ponderação perceptual.\n\n" +
+                "Deseja activar agora?"
             )
 
             if result:
                 self.var_perceptual_weighting.set(True)
                 messagebox.showinfo(
-                    "Ponderação Ativada",
-                    "A ponderação perceptual foi ativada. " +
-                    "Os próximos cálculos usarão pesos baseados no registro."
+                    "Ponderação Activada",
+                    "A ponderação perceptual foi activada. " +
+                    "Os próximos cálculos usarão pesos baseados no registo."
                 )
 
             # Marcar que a sugestão já foi mostrada
@@ -864,7 +864,7 @@ class DensityCalculatorGUI:
 
         for k, v in results["metricas_adicionais"].items():
 
-            if k != "chroma_vector":  # Tratar vetor de croma separadamente
+            if k != "chroma_vector":  # Tratar vector de croma separadamente
 
                 if isinstance(v, (int, float)) and not np.isnan(v) and not np.isinf(v):
 
@@ -949,7 +949,7 @@ class DensityCalculatorGUI:
 
 
 
-        # Adicionar valores exatos no topo das barras
+        # Adicionar valores exactos no topo das barras
 
         for bar in bars:
 
@@ -999,7 +999,7 @@ class DensityCalculatorGUI:
 
 
 
-        # Adicionar toolbar para interatividade
+        # Adicionar toolbar para interactividade
 
         toolbar = NavigationToolbar2Tk(canvas, self.embedded_graphs_frame)
 
@@ -1021,13 +1021,13 @@ class DensityCalculatorGUI:
 
         """
 
-        # Obter diretório para salvar relatórios
+        # Obter directório para salvar relatórios
 
-        directory = filedialog.askdirectory(title="Selecione o diretório para salvar os relatórios")
+        directory = filedialog.askdirectory(title="Seleccione o directório para salvar os relatórios")
 
         if not directory:
 
-            return  # Usuário cancelou a seleção
+            return  # Usuário cancelou a selecção
 
 
 
@@ -1099,7 +1099,7 @@ class DensityCalculatorGUI:
 
         conclusions_text.grid(row=4, column=1, pady=5)
 
-        conclusions_text.insert("1.0", "As análises realizadas demonstram a eficácia das métricas espectrais e de textura para a caracterização objetiva de material musical. Os resultados podem ser aplicados em contextos de análise musical, compositiva e de síntese sonora.")
+        conclusions_text.insert("1.0", "As análises realizadas demonstram a eficácia das métricas espectrais e de textura para a caracterização objectiva de material musical. Os resultados podem ser aplicados em contextos de análise musical, compositiva e de síntese sonora.")
 
 
 
@@ -1246,9 +1246,9 @@ def abrir_janela_calibracao(root):
     control_frame = ttk.Frame(calibration_window)
     control_frame.pack(side=tk.TOP, fill=tk.X, padx=10, pady=10)
 
-    # Mostrar valor atual
+    # Mostrar valor actual
     lambda_atual = obter_lambda_atual()
-    lambda_label = ttk.Label(control_frame, text=f"Valor atual de lambda: {lambda_atual:.4f}")
+    lambda_label = ttk.Label(control_frame, text=f"Valor actual de lambda: {lambda_atual:.4f}")
     lambda_label.pack(side=tk.LEFT, padx=5)
 
     # Frame para o gráfico
@@ -1274,7 +1274,7 @@ def abrir_janela_calibracao(root):
             intervalos.append(str(intervalo))
             valores_exp.append(valor_exp)
 
-            # Calcular valores com lambda atual (código simplificado)
+            # Calcular valores com lambda actual (código simplificado)
             if intervalo == 0:
                 densidade = 0  # uníssono é tratado especialmente
             else:
@@ -1312,7 +1312,7 @@ def abrir_janela_calibracao(root):
         try:
             realizar_calibracao()
             lambda_atual = obter_lambda_atual()
-            lambda_label.config(text=f"Valor atual de lambda: {lambda_atual:.4f}")
+            lambda_label.config(text=f"Valor actual de lambda: {lambda_atual:.4f}")
             atualizar_grafico()
             messagebox.showinfo("Calibração", f"Calibração concluída. Novo lambda: {lambda_atual:.4f}")
         except Exception as e:
@@ -1329,17 +1329,17 @@ def abrir_janela_calibracao(root):
                 from densidade_intervalar import salvar_parametros_calibrados
                 salvar_parametros_calibrados({"lambda": valor})
                 lambda_atual = obter_lambda_atual()
-                lambda_label.config(text=f"Valor atual de lambda: {lambda_atual:.4f}")
+                lambda_label.config(text=f"Valor actual de lambda: {lambda_atual:.4f}")
                 atualizar_grafico()
         except Exception as e:
             messagebox.showerror("Erro", f"Erro ao definir lambda: {e}")
 
-    # Função para coletar dados experimentais personalizados
+    # Função para colectar dados experimentais personalizados
     def coletar_dados_experimentais():
         try:
-            # Esta função abrirá uma nova janela para coletar avaliações de consonância
+            # Esta função abrirá uma nova janela para colectar avaliações de consonância
             data_window = tk.Toplevel(calibration_window)
-            data_window.title("Coleta de Dados Experimentais")
+            data_window.title("Colecta de Dados Experimentais")
             data_window.geometry("500x400")
 
             # Armazenar valores inseridos
@@ -1394,7 +1394,7 @@ def abrir_janela_calibracao(root):
                 # Executar calibração
                 realizar_calibracao(dados)
                 lambda_atual = obter_lambda_atual()
-                lambda_label.config(text=f"Valor atual de lambda: {lambda_atual:.4f}")
+                lambda_label.config(text=f"Valor actual de lambda: {lambda_atual:.4f}")
                 atualizar_grafico()
                 messagebox.showinfo("Calibração", f"Calibração concluída. Novo lambda: {lambda_atual:.4f}")
 
@@ -1406,7 +1406,7 @@ def abrir_janela_calibracao(root):
             ttk.Button(button_frame, text="Cancelar", command=data_window.destroy).pack(side=tk.RIGHT, padx=5)
 
         except Exception as e:
-            messagebox.showerror("Erro", f"Erro ao coletar dados: {e}")
+            messagebox.showerror("Erro", f"Erro ao colectar dados: {e}")
 
     # Função para visualizar o efeito de diferentes lambdas
     def analisar_efeito_lambda():

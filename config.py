@@ -1,4 +1,4 @@
-﻿# config.py
+# config.py
 # Configurações centralizadas para toda a aplicação
 
 from typing import Dict, List, Tuple, Any
@@ -19,7 +19,7 @@ USE_LOG_COMPRESSION = True
 # CONFIGURAÇÕES GERAIS
 # ===================================================================
 
-# Diretório padrão para salvar arquivos
+# Directório padrão para salvar ficheiros
 DEFAULT_OUTPUT_DIRECTORY = os.path.join(os.path.expanduser("~"), "Densidade_Espectral_Output")
 
 # Definição de níveis de log
@@ -96,7 +96,7 @@ UI_COLORS = {
 
 # Opções para os menus dropdown
 DYNAMIC_LEVELS = ['pppp', 'ppp', 'pp', 'p', 'mf', 'f', 'ff', 'fff', 'ffff']
-INSTRUMENT_LIST = ['flautim', 'flauta', 'Oboe', 'Corne_ingles', 'clarinete', 
+INSTRUMENT_LIST = ['flautim', 'flauta', 'Oboé', 'Corne_inglês', 'clarinete',
                    'clarinete baixo', 'fagote', 'contrafagote', 'violino']
 OCTAVE_LIST = [str(i) for i in range(10)]
 QUANTITY_LIST = [str(i) for i in range(1, 21)]
@@ -124,10 +124,10 @@ HIGH_CORRELATION_THRESHOLD = 0.7
 
 # Formatos de saída suportados
 REPORT_FORMATS = {
-    "pdf": "PDF Report",
-    "txt": "Text Report",
-    "json": "JSON Data",
-    "csv": "CSV Data",
+    "pdf": "Relatório PDF",
+    "txt": "Relatório de Texto",
+    "json": "Dados JSON",
+    "csv": "Dados CSV",
 }
 
 # Configurações de figuras para relatórios
@@ -148,7 +148,7 @@ ERROR_MESSAGES = {
     "invalid_note": "Nota musical inválida",
     "calculation_error": "Erro durante o cálculo das métricas",
     "missing_inputs": "Preencha todos os campos obrigatórios",
-    "file_save_error": "Erro ao salvar o arquivo",
+    "file_save_error": "Erro ao salvar o ficheiro",
     "insufficient_samples": "Número insuficiente de amostras para validação estatística",
     "module_not_found": "Módulo não encontrado",
 }
